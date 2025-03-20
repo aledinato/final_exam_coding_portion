@@ -19,33 +19,29 @@ class Stack {
   Stack() : top(0) {}
 
   void push(const T& value) {
-    if(isFull()){
+    if (isFull()) {
       throw std::overflow_error("Stack overflow");
     }
     stack_data[top++] = value;
   }
 
   void pop() {
-    if(StackIsEmpty()){
+    if (StackIsEmpty()) {
       throw std::underflow_error("Stack underflow");
     }
     top--;
   }
 
   T peek() const {
-    if(StackIsEmpty()){
+    if (StackIsEmpty()) {
       throw std::underflow_error("Stack underflow");
     }
     return stack_data[top - 1];
   }
 
-  bool StackIsEmpty() const {
-    return top == 0;
-  }
+  bool StackIsEmpty() const { return top == 0; }
 
-  bool isFull() const {
-    return top >= max_size;
-  }
+  bool isFull() const { return top >= max_size; }
 
   std::size_t size() const { return top; }
 };
