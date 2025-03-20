@@ -6,6 +6,7 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <algorithm> 
 
 const size_t precomputedSmallPrimesLUTSize = 100;
 const size_t MaxLUTSize = 1000000;
@@ -74,5 +75,6 @@ std::vector<uint64_t> primesInRange(uint64_t start, uint64_t end,
     thread.join();
   }
 
+  std::sort(primes.begin(), primes.end());
   return primes;
 }
