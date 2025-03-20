@@ -1,0 +1,33 @@
+name: Format
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Tools
+        run: |
+          sudo apt update
+          sudo apt install -y clang-format
+      - name: Verify Format
+        run: |
+          clang-format --dry-run --Werror --style=Google src/*.cpp src/*.h
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Libraries (With Cache)
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libpng-dev
+          execute_install_scripts: true
+      - name: Build random_image
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./random_image a.png 50 50
