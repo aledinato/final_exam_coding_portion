@@ -1,7 +1,6 @@
 // Copyright (c) 2025 Ethan Sifferman.
 // All rights reserved. Distribution Prohibited.
 
-#include <algorithm>
 #include <cstdint>
 #include <cstring>
 #include <mutex>
@@ -32,7 +31,6 @@ bool isPrime(uint64_t n) {
   for (uint64_t i = 5; i * i <= n; i += 6) {
     if (n % i == 0 || n % (i + 2) == 0) return false;
   }
-
   delete localLUT;
   return true;
 }
@@ -65,7 +63,7 @@ std::vector<uint64_t> primesInRange(uint64_t start, uint64_t end,
 
   for (int i = 0; i < num_jobs; i++) {
     const uint64_t thread_start = start + i * range_size;
-    const uint64_t thread_end = thread_start + range_size - 1;
+    const uint64_t thread_end = (i == num_jobs - 1) ? end : thread_start + range_size - 1;
 
     threads.emplace_back(primesInRangeThread, thread_start, thread_end, &primes,
                          &primes_mutex);
@@ -74,7 +72,6 @@ std::vector<uint64_t> primesInRange(uint64_t start, uint64_t end,
   for (auto &thread : threads) {
     thread.join();
   }
-
   std::sort(primes.begin(), primes.end());
   return primes;
 }
