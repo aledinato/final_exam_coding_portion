@@ -24,7 +24,7 @@ jobs:
         with:
           packages: libpng-dev
           execute_install_scripts: true
-      - name: Build random_image
+      - name: Build and Run random_image
         run: |
           mkdir -p build
           cd build

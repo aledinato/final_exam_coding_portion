@@ -11,7 +11,7 @@ void writeVectorToFile(const std::vector<T> &vec, const std::string &filepath) {
   std::filesystem::path file_path(filepath);
   std::filesystem::path dir = file_path.parent_path();
 
-  if (!dir.empty() && !std::filesystem::exists(dir)) {
+  if (!dir.empty() || !std::filesystem::exists(dir)) {
     std::filesystem::create_directories(dir);
   }
 

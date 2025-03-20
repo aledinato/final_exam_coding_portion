@@ -32,6 +32,7 @@ bool isPrime(uint64_t n) {
     if (n % i == 0 || n % (i + 2) == 0) return false;
   }
 
+  delete localLUT;
   return true;
 }
 
