@@ -9,54 +9,43 @@
 template <typename T>
 class Stack {
  public:
-  // max size of stack
-  static constexpr size_t N = 5;
+  static constexpr size_t max_size = 5;
 
  private:
-  std::array<T, N> d;  // data inside stack
+  std::array<T, max_size> stack_data;
   std::size_t top;
 
  public:
   Stack() : top(0) {}
 
   void push(const T& value) {
-    if (top >= N) {
+    if(isFull()){
       throw std::overflow_error("Stack overflow");
     }
-    d[top++] = value;
+    stack_data[top++] = value;
   }
 
   void pop() {
-    if (top == 0) {
+    if(StackIsEmpty()){
       throw std::underflow_error("Stack underflow");
     }
     top--;
   }
 
-  T peek() {
-    if (top == 0) {
-      // std::cerr << "Debug" << std::endl;
-      throw std::underflow_error("Stack is empty");
+  T peek() const {
+    if(StackIsEmpty()){
+      throw std::underflow_error("Stack underflow");
     }
-    return d[top - 1];
+    return stack_data[top - 1];
   }
 
-  bool StackIsEmpty() {
-    bool full;
-    if (top == 0)
-      full = true;
-    else
-      full = false;
-    return full;
+  bool StackIsEmpty() const {
+    return top == 0;
   }
 
-  bool isFull() {
-    if (top == 5)
-      return true;
-    else
-      return false;
+  bool isFull() const {
+    return top >= max_size;
   }
 
-  // This function will return the number of elements inside of the stack object
-  std::size_t s() const { return top; }
+  std::size_t size() const { return top; }
 };
