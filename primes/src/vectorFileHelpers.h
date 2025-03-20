@@ -15,7 +15,7 @@ void writeVectorToFile(const std::vector<T> &vec, const std::string &filepath) {
     std::filesystem::create_directories(dir);
   }
 
-  std::ofstream outFile(filepath, std::ios::out);
+  std::ofstream outFile(filepath);
   if (!outFile) throw std::runtime_error("Unable to open file " + filepath);
   for (const auto &element : vec) outFile << element << "\n";
   outFile.close();

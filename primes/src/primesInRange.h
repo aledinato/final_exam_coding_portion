@@ -1,12 +1,12 @@
 // Copyright (c) 2025 Ethan Sifferman.
 // All rights reserved. Distribution Prohibited.
 
+#include <algorithm>
 #include <cstdint>
 #include <cstring>
 #include <mutex>
 #include <thread>
 #include <vector>
-#include <algorithm> 
 
 const size_t precomputedSmallPrimesLUTSize = 100;
 const size_t MaxLUTSize = 1000000;
